@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget id="caffcode.scriptloader.ScriptLoader" pluginWidget="true" needsEntityContext="true" offlineCapable="true"
+        supportedPlatform="Web"
+        xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd">
+    <name>Script Loader</name>
+    <description>Load scripts in your Mendix page</description>
+    <icon/>
+    <properties>
+        <propertyGroup caption="General">
+            <property key="scripts" type="object" isList="true" required="false">
+                <caption>Scripts</caption>
+                <description>Define your scripts you want to load</description>
+                <properties>
+                    <propertyGroup caption="Main">
+                        <property key="scriptURL" type="expression" required="true" defaultValue="">
+                            <caption>Script URL</caption>
+                            <description></description>
+                            <returnType type="String" />
+                        </property>
+                    </propertyGroup>
+                    <propertyGroup caption="Actions">
+                        <property key="onLoad" type="action" required="false">
+                            <caption>On Load</caption>
+                            <description>(Optional) Action that can be executed when loaded. It makes the most sense to execute a Nanoflow (with some custom Javascript Action).</description>
+                        </property>
+                        <property key="onError" type="action" required="false">
+                            <caption>On Error</caption>
+                            <description>(Optional) Action that can be executed when there is an error loading the script</description>
+                        </property>
+                    </propertyGroup>
+                    <propertyGroup caption="Timings">
+                        <property key="loadDelay" type="expression" required="true" defaultValue="0">
+                            <caption>Delay (ms)</caption>
+                            <description>Delay for loading the script</description>
+                            <returnType type="Integer" />
+                        </property>
+                    </propertyGroup>
+                    <propertyGroup caption="Misc">
+                        <property key="scriptElementProps" type="expression" required="false" defaultValue="">
+                            <caption>Script Props</caption>
+                            <description>If you need to set certain props on the &lt;script /&gt; element, you can define them here as a proper JSON string.</description>
+                            <returnType type="String" />
+                        </property>
+                    </propertyGroup>
+                </properties>
+            </property>
+            <property key="loadingType" type="enumeration" defaultValue="parallel">
+                <caption>Load type</caption>
+                <description>When loading the scripts, you can make it load all of them in parallel or sequential.</description>
+                <enumerationValues>
+                     <enumerationValue key="parallel">Parallel</enumerationValue>
+                     <enumerationValue key="sequential">Sequential</enumerationValue>
+                </enumerationValues>
+            </property>
+            <property key="removeScriptsOnUnload" type="boolean" defaultValue="true">
+                <caption>Remove unload</caption>
+                <description>Do you want to remove the scripts when the widget gets unloaded? Typically you would do something like that with a specific script you need on a specific page. When you use this in a layout, it would probably be set to 'false'</description>
+            </property>
+        </propertyGroup>
+        <propertyGroup caption="Actions">
+            <property key="onLoadAll" type="action" required="false">
+                <caption>On Load All</caption>
+                <description>(Optional) Execute when loaded all the scripts</description>
+            </property>
+            <property key="onErrorAll" type="action" required="false">
+                <caption>On Error All</caption>
+                <description>(Optional) Execute when some of the scripts fail</description>
+            </property>
+        </propertyGroup>
+    </properties>
+</widget>
